@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hệ thống Chat Hỗ trợ Khách hàng - WebSocket Demo</title>
+    <link rel="stylesheet" href="/css/chat.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Header -->
+      <div class="header">
+        <h1>💬 Chat Hỗ trợ Khách hàng</h1>
+        <p>Powered by WebSocket & Spring Boot</p>
+      </div>
+
+      <!-- Main Chat Container -->
+      <div class="chat-container" id="chatContainer">
+        <!-- Username Form -->
+        <div class="username-page" id="usernamePage">
+          <div class="username-page-container">
+            <h2>Tham gia Chat</h2>
+            <form id="usernameForm">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="name"
+                  placeholder="Nhập tên của bạn..."
+                  maxlength="50"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <select id="userRole" required>
+                  <option value="">Chọn vai trò</option>
+                  <option value="customer">Khách hàng</option>
+                  <option value="support">Nhân viên hỗ trợ</option>
+                </select>
+              </div>
+              <button type="submit" class="accent username-submit">
+                Bắt đầu Chat
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Chat Page -->
+        <div class="chat-page" id="chatPage" style="display: none">
+          <!-- Chat Header -->
+          <div class="chat-header">
+            <div class="chat-header-left">
+              <h3 id="chatTitle">Chat công khai</h3>
+              <span class="online-status">● Online</span>
+            </div>
+            <div class="chat-header-right">
+              <span class="user-info"
+                >Xin chào, <strong id="currentUser"></strong>!</span
+              >
+              <button id="leaveChat" class="leave-btn">Rời khỏi</button>
+            </div>
+          </div>
+
+          <!-- Chat Body: Users list + Messages Area -->
+          <div
+            class="chat-body"
+            style="display: flex; gap: 0; flex: 1; min-height: 0"
+          >
+            <aside
+              class="users-panel"
+              id="usersPanel"
+              style="
+                width: 260px;
+                border-right: 1px solid #eee;
+                background: #fff;
+                display: none;
+                flex-direction: column;
+              "
+            >
+              <div
+                class="users-header"
+                style="
+                  padding: 12px 16px;
+                  font-weight: 700;
+                  background: #fafafa;
+                  border-bottom: 1px solid #eee;
+                "
+              >
+                Người đang online
+              </div>
+              <ul
+                id="usersList"
+                style="
+                  list-style: none;
+                  margin: 0;
+                  padding: 8px 0;
+                  overflow: auto;
+                  flex: 1;
+                "
+              ></ul>
+            </aside>
+            <div class="chat-area" style="flex: 1">
+              <ul id="messageArea" class="message-list">
+                <!-- Messages will be dynamically added here -->
+              </ul>
+            </div>
+          </div>
+
+          <!-- Message Input -->
+          <div class="message-form-container">
+            <form id="messageForm" name="messageForm">
+              <div class="form-group">
+                <input
+                  type="text"
+                  id="message"
+                  placeholder="Nhập tin nhắn..."
+                  maxlength="500"
+                  required
+                />
+                <button type="submit" class="primary">Gửi</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Connection Status -->
+          <div class="connection-status" id="connectionStatus">
+            <span class="connecting">Đang kết nối...</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="footer">
+        <p>WebSocket Demo - Spring Boot Chat Application</p>
+        <small>Real-time messaging với STOMP Protocol</small>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+    <script src="/js/chat.js"></script>
+  </body>
+</html>
